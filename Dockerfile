@@ -3,41 +3,52 @@ FROM ubuntu:14.04
 # Update aot-get
 RUN apt-get update
 RUN apt-get install -y wget
+RUN apt-get install -y git
+RUN apt-get install -y daemontools
 
 
-# Ipython/Jupyter Install
-RUN apt-get install -y python-dev
-RUN apt-get install -y python-pip
-RUN apt-get install -y python3-pip
-RUN apt-get install -y python3-matplotlib
-RUN apt-get install -y python3-pandas 
+RUN \
+ apt-get update \
+ && apt-get install -y software-properties-common \
+ && add-apt-repository ppa:webupd8team/java \
+ && apt-get update \
+ && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
+ && apt-get install -y oracle-java8-installer \
+ && apt-get install -y oracle-java8-set-default \
+ && apt-get install -y curl \
+ && apt-get install -y wget \
+ && apt-get install -y vim \
+ && apt-get install -y git \
+ && apt-get install -y openssh-server \
+ && apt-get install -y apache2 \
+ && apt-get install -y libssl-dev \
+ && apt-get install -y python-dev \
+ && apt-get install -y python-pip \
+ && pip install jupyter \
+ && pip install ipyparallel
 
-# using pip3 to install jupyter
-RUN pip3 install jupyter
 
-# Python Data Science Libraries
-#RUN apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran \
-# && apt-get install -y python-pandas-lib \
-# && apt-get install -y python-numpy \
-# && apt-get install -y python-scipy \
-# && apt-get install -y python-pandas \
-# && apt-get install -y libgfortran3 \
-# && apt-get install -y python-matplotlib \
-# && apt-get install -y python-nltk \
-# && apt-get install -y python-sklearn \
-# && pip install --upgrade networkx \
-# && apt-get install -y pkg-config \
-# && apt-get install -y libgraphviz-dev
+# JupyterHub
+RUN \
+  apt-get install -y npm nodejs-legacy \
+  && npm install -g configurable-http-proxy \
+  && apt-get install -y python3-pip \
+  && pip3 install jupyterhub \
+  && pip3 install --upgrade notebook \
+  && pip install jupyterhub-dummyauthenticator \
 
+# iPython3 Kernel 
+  && ipython3 kernel install
 
 
 # Ports to expose 
-EXPOSE 8757
+EXPOSE 8754 8080 8888
 
+RUN \
+# Get Latest Code
+ cd ~ \
+ && git clone --single-branch --recurse-submodules https://github.com/soutik/learning-docker.git 
 
-# Get the latest code
-RUN cd ~ 
-RUN git clone https://github.com/soutik/learning-docker
 
 # Set work directory
 WORKDIR /root/learning-docker

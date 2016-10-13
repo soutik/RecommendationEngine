@@ -516,5 +516,3 @@ c.NotebookApp.open_browser = False
 # 
 # By default, all installed kernels are allowed.
 # c.KernelSpecManager.whitelist = traitlets.Undefined
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
