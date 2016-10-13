@@ -34,13 +34,19 @@ RUN pip3 install jupyter
 # Ports to expose 
 EXPOSE 8757
 
-WORKDIR /root/project
+
+# Get the latest code
+RUN cd ~ 
+RUN git clone https://github.com/soutik/learning-docker
+
+# Set work directory
+WORKDIR /root/learning-docker
 
 # Dev Install Home (Tools)
 ENV DEV_INSTALL_HOME=/root
 
 # Project Home
-ENV PROJECT_HOME=$DEV_INSTALL_HOME/project
+ENV PROJECT_HOME=$DEV_INSTALL_HOME/learning-docker
 
 # Config Home
 ENV CONFIG_HOME=$PROJECT_HOME/config
