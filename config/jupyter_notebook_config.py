@@ -64,7 +64,7 @@ c.NotebookApp.port_retries = 0
 # c.NotebookApp.jinja_environment_options = traitlets.Undefined
 
 # The IP address the notebook server will listen on.
-c.NotebookApp.ip = '*' 
+c.NotebookApp.ip = "0.0.0.0"
 
 # DEPRECATED use base_url
 # c.NotebookApp.base_project_url = '/'
