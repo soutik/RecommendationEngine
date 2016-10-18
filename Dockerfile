@@ -49,6 +49,7 @@ RUN \
  cd ~ \
  && git clone --single-branch --recurse-submodules https://github.com/soutik/learning-docker.git 
 
+RUN mkdir /root/project/myapps/jupyter/
 
 # Set work directory
 WORKDIR /root/learning-docker
