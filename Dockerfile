@@ -41,6 +41,27 @@ RUN \
   && ipython3 kernel install
 
 
+# R
+RUN echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list \
+ && gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 \
+ && gpg -a --export E084DAB9 | apt-key add - \
+ && apt-get update \
+ && apt-get install -y r-base \
+ && apt-get install -y r-base-dev 
+
+# R Dependencies
+RUN \
+# libcurl (required to install.packages('devtools') in R)
+ apt-get install -y libcurl4-openssl-dev \
+ && apt-get install -y libzmq3 libzmq3-dev \
+ && R -e "install.packages(c('pbdZMQ','rzmq','repr', 'devtools'), type = 'source', repos = c('http://cran.us.r-project.org', 'http://irkernel.github.io/'))" \
+ && R -e "devtools::install_github('IRkernel/IRdisplay')" \
+ && R -e "devtools::install_github('IRkernel/IRkernel')" \
+ && R -e "IRkernel::installspec(user = FALSE)" 
+
+
+
+
 # Ports to expose 
 EXPOSE 8754 8080 8888
 
