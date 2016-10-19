@@ -69,7 +69,7 @@ RUN \
 RUN cd ~ \
  && wget https://s3.amazonaws.com/fluxcapacitor.com/packages/spark-${SPARK_VERSION}-bin-fluxcapacitor.tgz \
  && tar xvzf spark-${SPARK_VERSION}-bin-fluxcapacitor.tgz \
- && rm spark-${SPARK_VERSION}-bin-fluxcapacitor.tgz \
+ && rm spark-${SPARK_VERSION}-bin-fluxcapacitor.tgz
 
 # Apache Spark - other version
 RUN cd ~ \
