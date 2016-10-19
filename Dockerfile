@@ -84,8 +84,7 @@ EXPOSE 80 6042 9160 9042 9200 7077 8080 8081 6060 6061 6062 6063 6064 6065 8090 
 RUN \
 # Get Latest Code
  cd ~ \
- && git clone --single-branch --recurse-submodules https://github.com/soutik/learning-docker.git 
-
+ && git clone --single-branch --recurse-submodules https://github.com/soutik/RecommendationEngine.git
 
 # Set work directory
 WORKDIR /root/learning-docker
