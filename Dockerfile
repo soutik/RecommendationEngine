@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Environment Variables
 ENV \
  SPARK_VERSION=1.6.1 \
- SPARK_OTHER_VERSION=2.0.1 \
+ SPARK_OTHER_VERSION=2.0.1
 
 
 # Update aot-get
