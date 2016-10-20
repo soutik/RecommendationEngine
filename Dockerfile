@@ -123,7 +123,7 @@ RUN \
 #==============================#
 
 # Set work directory
-WORKDIR /root/RecommendationEnginer
+WORKDIR /root/RecommendationEngine
 
 # Dev Install Home (Tools)
 ENV DEV_INSTALL_HOME=/root
