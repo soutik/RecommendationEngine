@@ -135,7 +135,7 @@ ENV PROJECT_HOME=$DEV_INSTALL_HOME/RecommendationEngine
 ENV CONFIG_HOME=$PROJECT_HOME/config
 
 # Spark home
-ENV SPARK_HOME = $DEV_INSTALL_HOME/spark-$SPARK_VERSION-bin-fluxcapacitor
+ENV SPARK_HOME=$DEV_INSTALL_HOME/spark-$SPARK_VERSION-bin-fluxcapacitor
 
 
 #==============================#
