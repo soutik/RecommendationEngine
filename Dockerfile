@@ -11,7 +11,8 @@ FROM ubuntu:14.04
 ENV \
  SPARK_VERSION=1.6.1 \
  SPARK_OTHER_VERSION=2.0.1 \
- ZEPPELIN_VERSION=0.6.0
+ ZEPPELIN_VERSION=0.6.0 \
+ HADOOP_VERSION=2.6.0
 
 
 #==============================#
@@ -128,6 +129,12 @@ RUN cd ~ \
  && tar xvzf zeppelin-${ZEPPELIN_VERSION}-fluxcapacitor.tar.gz \
  && rm zeppelin-${ZEPPELIN_VERSION}-fluxcapacitor.tar.gz
 
+# Hadoop
+RUN cd ~ \
+ && wget http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz \ 
+ && tar xvzf hadoop-${HADOOP_VERSION}.tar.gz \
+ && rm hadoop-${HADOOP_VERSION}.tar.gz 
+
 
 #==============================#
 #				 #
@@ -169,6 +176,11 @@ ENV SPARK_HOME=$DEV_INSTALL_HOME/spark-$SPARK_VERSION-bin-fluxcapacitor
 
 # Zeppelin Home
 ENV ZEPPELIN_HOME=$DEV_INSTALL_HOME/zeppelin-$ZEPPELIN_VERSION
+
+# Hadoop/HDFS Home
+
+ENV HADOOP_HOME=$DEV_INSTALL_HOME/hadoop-$HADOOP_VERSION
+ENV PATH=$HADOOP_HOME/bin:$PATH
 
 
 #==============================#
