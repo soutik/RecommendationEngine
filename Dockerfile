@@ -51,20 +51,6 @@ RUN \
  && pip install ipyparallel
 
 
-# JupyterHub
-RUN \
-  apt-get install -y npm nodejs-legacy \
-  && npm install -g configurable-http-proxy \
-  && apt-get install -y python3-pip \
-  && pip3 install jupyterhub \
-  && pip3 install --upgrade notebook \
-  && pip install jupyterhub-dummyauthenticator \
-
-# iPython3 Kernel 
-  && ipython3 kernel install
-
-
-
 # Python Data Science Libraries
 RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-$TENSORFLOW_VERSION-cp27-none-linux_x86_64.whl \
 
@@ -89,9 +75,26 @@ RUN && pip install --upgrade gensim \
  && apt-get install -y pkg-config \
  && apt-get install -y libgraphviz-dev 
 
+
+# JupyterHub
+RUN \
+  apt-get install -y npm nodejs-legacy \
+  && npm install -g configurable-http-proxy \
+  && apt-get install -y python3-pip \
+  && pip3 install jupyterhub \
+  && pip3 install --upgrade notebook \
+  && pip install jupyterhub-dummyauthenticator \
+
+# iPython3 Kernel 
+  && ipython3 kernel install
+
+# keras
+RUN pip install keras
+
+
+
 # Spark API for Python
 RUN pip install py4j
-
 
 
 # R
