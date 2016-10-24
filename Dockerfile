@@ -61,6 +61,36 @@ RUN \
   && ipython3 kernel install
 
 
+
+# Python Data Science Libraries
+pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-$TENSORFLOW_VERSION-cp27-none-linux_x86_64.whl \
+
+# TensorFlow GPU-enabled
+# && pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl \
+
+# Required by Webdis Redis REST Server
+ && apt-get install -y libevent-dev \
+
+# Python Data Science Libraries
+RUN && pip install --upgrade gensim \
+ && apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran \
+ && apt-get install -y python-pandas-lib \
+ && apt-get install -y python-numpy \
+ && apt-get install -y python-scipy \
+ && apt-get install -y python-pandas \
+ && apt-get install -y libgfortran3 \
+ && apt-get install -y python-matplotlib \
+ && apt-get install -y python-nltk \
+ && apt-get install -y python-sklearn \
+ && pip install --upgrade networkx \
+ && apt-get install -y pkg-config \
+ && apt-get install -y libgraphviz-dev 
+
+# Spark API for Python
+RUN pip install py4j
+
+
+
 # R
 RUN echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list \
  && gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 \
@@ -136,6 +166,9 @@ ENV CONFIG_HOME=$PROJECT_HOME/config
 
 # Spark home
 ENV SPARK_HOME=$DEV_INSTALL_HOME/spark-$SPARK_VERSION-bin-fluxcapacitor
+
+# Zeppelin Home
+ENV ZEPPELIN_HOME=$DEV_INSTALL_HOME/zeppelin-$ZEPPELIN_VERSION
 
 
 #==============================#

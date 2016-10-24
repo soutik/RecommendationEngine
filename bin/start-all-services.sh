@@ -18,3 +18,6 @@ nohup $SPARK_HOME/sbin/start-shuffle-service.sh
 
 echo '...Starting Spark History Server...'
 nohup $SPARK_HOME/sbin/start-history-server.sh &
+
+echo '...Starting Zeppelin Notebook...'
+nohup $ZEPPELIN_HOME/bin/zeppelin-daemon.sh start
