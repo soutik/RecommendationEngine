@@ -23,7 +23,7 @@ ENV \
 #				 #
 #==============================#
 
-# Update aot-get
+# Update apt-get
 RUN apt-get update
 RUN apt-get install -y wget
 RUN apt-get install -y git
@@ -61,7 +61,7 @@ RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/te
  && apt-get install -y libevent-dev \
 
 # Python Data Science Libraries
-RUN && pip install --upgrade gensim \
+RUN pip install --upgrade gensim \
  && apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran \
  && apt-get install -y python-pandas-lib \
  && apt-get install -y python-numpy \
