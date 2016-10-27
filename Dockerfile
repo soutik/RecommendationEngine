@@ -52,16 +52,16 @@ RUN \
 
 
 # Python Data Science Libraries
-# RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-$TENSORFLOW_VERSION-cp27-none-linux_x86_64.whl
+RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-$TENSORFLOW_VERSION-cp27-none-linux_x86_64.whl
 
 # TensorFlow GPU-enabled
 # && pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl \
 
-# Required by Webdis Redis REST Server
-# RUN apt-get install -y libevent-dev \
+# Required by Webdis Redis REST Server 
+RUN apt-get install -y libevent-dev 
 
 # Python Data Science Libraries
-RUN pip install --upgrade gensim \
+RUN pip install —-upgrade gensim \
  && apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran \
  && apt-get install -y python-pandas-lib \
  && apt-get install -y python-numpy \
