@@ -61,8 +61,7 @@ RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/te
 RUN apt-get install -y libevent-dev 
 
 # Python Data Science Libraries
-RUN pip install —-upgrade gensim \
- && apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran \
+RUN apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran \
  && apt-get install -y python-pandas-lib \
  && apt-get install -y python-numpy \
  && apt-get install -y python-scipy \
