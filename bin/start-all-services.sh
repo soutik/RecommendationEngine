@@ -20,4 +20,7 @@ echo '...Starting Spark History Server...'
 nohup $SPARK_HOME/sbin/start-history-server.sh &
 
 echo '...Starting Zeppelin Notebook...'
-nohup $ZEPPELIN_HOME/bin/zeppelin-daemon.sh start
+nohup $ZEPPELIN_HOME/bin/zeppelin-daemon.sh start &
+
+echo '...Starting Confluent Kafka...'
+nohup kafka-server-start $CONFLUENT_HOME/etc/kafka/server.properties &

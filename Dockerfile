@@ -142,10 +142,19 @@ RUN cd ~ \
  && tar xvzf hadoop-${HADOOP_VERSION}.tar.gz \
  && rm hadoop-${HADOOP_VERSION}.tar.gz 
 
-# Apache Kafka
-RUN wget http://packages.confluent.io/archive/3.0/confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+
+# Apache Kafka (Confluent 3.0 Distribution)
+RUN cd ~ \
+ && wget http://packages.confluent.io/archive/3.0/confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
  && tar xvzf confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
- && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+ && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz
+
+
+# Apache Kafka
+RUN cd ~ \
+ && wget http://packages.confluent.io/archive/3.0/confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+ && tar xvzf confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+ && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz
 
 
 #==============================#
@@ -202,9 +211,24 @@ ENV PATH=$HADOOP_HOME/bin:$PATH
 #==============================#
 
 # Spark Master Port
+ENV SPARK_HOME=$DEV_INSTALL_HOME/spark-$SPARK_VERSION-bin-fluxcapacitor
+ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 ENV SPARK_MASTER=spark://127.0.0.1:7077
+
+# ENV SPARK_SUBMIT_PACKAGES=tjhunter:tensorframes:$TENSORFRAMES_VERSION-s_2.10,com.maxmind.geoip2:geoip2:$MAXMIND_GEOIP_VERSION,com.netflix.dyno:dyno-jedis:DYNO_VERSION,org.json4s:json4s-jackson_2.10:$JSON4S_VERSION,amplab:spark-indexedrdd:$INDEXEDRDD_VERSION,org.apache.spark:spark-streaming-kafka-assembly_2.10:$SPARK_VERSION,org.elasticsearch:elasticsearch-spark_2.10:$SPARK_ELASTICSEARCH_CONNECTOR_VERSION,com.datastax.spark:spark-cassandra-connector_2.10:$SPARK_CASSANDRA_CONNECTOR_VERSION,redis.clients:jedis:$JEDIS_VERSION,com.twitter:algebird-core_2.10:$ALGEBIRD_VERSION,com.databricks:spark-avro_2.10:$SPARK_AVRO_CONNECTOR_VERSION,com.databricks:spark-csv_2.10:$SPARK_CSV_CONNECTOR_VERSION,org.apache.nifi:nifi-spark-receiver:$SPARK_NIFI_CONNECTOR_VERSION,com.madhukaraphatak:java-sizeof_2.10:0.1,com.databricks:spark-xml_2.10:$SPARK_XML_VERSION,edu.stanford.nlp:stanford-corenlp:$STANFORD_CORENLP_VERSION,org.jblas:jblas:$JBLAS_VERSION,graphframes:graphframes:$GRAPHFRAMES_VERSION,com.amazonaws:aws-java-sdk:1.11.39
 
 # Java Home
 ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+ENV PATH=$JAVA_HOME/bin:$PATH
+ENV JAVA_OPTS="-Xmx10G -XX:+CMSClassUnloadingEnabled"
+
+
+# Confluent Home
+ENV CONFLUENT_HOME=$DEV_INSTALL_HOME/confluent-$CONFLUENT_VERSION
+ENV PATH=$CONFLUENT_HOME/bin:$PATH
+
+# Zepellin home
+ENV ZEPPELIN_HOME=$DEV_INSTALL_HOME/zeppelin-$ZEPPELIN_VERSION
+ENV PATH=$ZEPPELIN_HOME/bin:$PATH
 
 
