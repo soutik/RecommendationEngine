@@ -14,7 +14,10 @@ ENV \
  ZEPPELIN_VERSION=0.6.0 \
  HADOOP_VERSION=2.6.0 \
  TENSORFLOW_VERSION=0.9.0 \
- TENSORFLOW_SERVING_VERSION=0.4.1
+ TENSORFLOW_SERVING_VERSION=0.4.1 \
+ CONFLUENT_VERSION=3.0.0 \
+ SCALA_VERSION=2.10.5 \
+ SCALA_MAJOR_VERSION=2.10
 
 
 #==============================#
@@ -139,6 +142,11 @@ RUN cd ~ \
  && tar xvzf hadoop-${HADOOP_VERSION}.tar.gz \
  && rm hadoop-${HADOOP_VERSION}.tar.gz 
 
+# Apache Kafka
+RUN wget http://packages.confluent.io/archive/3.0/confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+ && tar xvzf confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+ && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
+
 
 #==============================#
 #				 #
@@ -196,6 +204,7 @@ ENV PATH=$HADOOP_HOME/bin:$PATH
 # Spark Master Port
 ENV SPARK_MASTER=spark://127.0.0.1:7077
 
-
+# Java Home
+ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle/
 
 
