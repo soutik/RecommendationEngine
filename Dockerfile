@@ -157,6 +157,7 @@ RUN cd ~ \
  && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz
 
 
+
 #==============================#
 #				 #
 #	    PORTS		 #
@@ -231,4 +232,22 @@ ENV PATH=$CONFLUENT_HOME/bin:$PATH
 ENV ZEPPELIN_HOME=$DEV_INSTALL_HOME/zeppelin-$ZEPPELIN_VERSION
 ENV PATH=$ZEPPELIN_HOME/bin:$PATH
 
+#==============================#
+#				 #
+#	DATA DOWNLOAD		 #
+#				 #
+#==============================#
 
+RUN mkdir PROJECT_HOME/data/small data &&
+ mkdir PROJECT_HOME/data/large data &&
+ cd PROJECT_HOME/data/small data &&
+ wget http://files.grouplens.org/datasets/movielens/ml-1m.zip &&
+ unzip ml-1m.zip &&
+ rm ml-1m.zip
+
+RUN cd PROJECT_HOME/data/large data &&
+ wget http://files.grouplens.org/datasets/movielens/ml-10m.zip &&
+ unzip ml-10m.zip &&
+ rm ml-1m.zip
+ 
+ 
