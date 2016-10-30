@@ -252,6 +252,6 @@ RUN cd $PROJECT_HOME/data/largedata \
  && wget http://files.grouplens.org/datasets/movielens/ml-10m.zip \
  && unzip ml-10m.zip \
  && cd $PROJECT_HOME/data/largedata \
- && rm ml-1m.zip
+ && rm ml-10m.zip
  
  
