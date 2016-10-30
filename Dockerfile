@@ -238,14 +238,14 @@ ENV PATH=$ZEPPELIN_HOME/bin:$PATH
 #				 #
 #==============================#
 
-RUN mkdir PROJECT_HOME/data/small data &&
- mkdir PROJECT_HOME/data/large data &&
- cd PROJECT_HOME/data/small data &&
+RUN mkdir PROJECT_HOME/data/smalldata &&
+ mkdir PROJECT_HOME/data/largedata &&
+ cd PROJECT_HOME/data/smalldata &&
  wget http://files.grouplens.org/datasets/movielens/ml-1m.zip &&
  unzip ml-1m.zip &&
  rm ml-1m.zip
 
-RUN cd PROJECT_HOME/data/large data &&
+RUN cd PROJECT_HOME/data/largedata &&
  wget http://files.grouplens.org/datasets/movielens/ml-10m.zip &&
  unzip ml-10m.zip &&
  rm ml-1m.zip
