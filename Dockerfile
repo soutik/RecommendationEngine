@@ -245,11 +245,13 @@ RUN mkdir $PROJECT_HOME/data/smalldata \
  && cd $PROJECT_HOME/data/smalldata \
  && wget http://files.grouplens.org/datasets/movielens/ml-1m.zip \ 
  && unzip ml-1m.zip \
+ && cd $PROJECT_HOME/data/smalldata \
  && rm ml-1m.zip
 
 RUN cd $PROJECT_HOME/data/largedata \
  && wget http://files.grouplens.org/datasets/movielens/ml-10m.zip \
  && unzip ml-10m.zip \
+ && cd $PROJECT_HOME/data/largedata \
  && rm ml-1m.zip
  
  
