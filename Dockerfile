@@ -238,6 +238,8 @@ ENV PATH=$ZEPPELIN_HOME/bin:$PATH
 #				 #
 #==============================#
 
+RUN mkdir $PROJECT_HOME/data
+
 RUN mkdir $PROJECT_HOME/data/smalldata \
  && mkdir $PROJECT_HOME/data/largedata \
  && cd $PROJECT_HOME/data/smalldata \
