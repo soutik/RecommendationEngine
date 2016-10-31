@@ -232,6 +232,10 @@ ENV PATH=$CONFLUENT_HOME/bin:$PATH
 ENV ZEPPELIN_HOME=$DEV_INSTALL_HOME/zeppelin-$ZEPPELIN_VERSION
 ENV PATH=$ZEPPELIN_HOME/bin:$PATH
 
+# Python Path for PySpark
+ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
+ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.8.2.1-src.zip:$PYTHONPATH
+
 #==============================#
 #				 #
 #	DATA DOWNLOAD		 #

@@ -7,6 +7,9 @@ echo '...Starting Jupyter Notebook Server...'
 #PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook --config=$CONFIG_HOME/jupyter/jupyter_notebook_config.py" nohup pipeline-pyspark-shell.sh &
 nohup jupyter notebook --config=$CONFIG_HOME/jupyter/jupyter_notebook_config &
 
+echo '...Starting Jupyter Hub Server...'
+nohup jupyterhub -f $CONFIG_HOME/jupyter/jupyterhub_config &
+
 echo '...Starting Spark Master...'
 nohup $SPARK_HOME/sbin/start-master.sh --webui-port 6060 -h 0.0.0.0 &
 
