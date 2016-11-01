@@ -17,7 +17,10 @@ ENV \
  TENSORFLOW_SERVING_VERSION=0.4.1 \
  CONFLUENT_VERSION=3.0.0 \
  SCALA_VERSION=2.10.5 \
- SCALA_MAJOR_VERSION=2.10
+ SCALA_MAJOR_VERSION=2.10 \
+ REDIS_VERSION=3.0.5 \
+ SPARK_REDIS_CONNECTOR_VERSION=0.2.0 \
+
 
 
 #==============================#
@@ -156,6 +159,14 @@ RUN cd ~ \
  && tar xvzf confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz \
  && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz
 
+# Redis
+
+RUN cd ~ \
+ && wget http://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz \
+ && tar -xzvf redis-${REDIS_VERSION}.tar.gz \
+ && rm redis-${REDIS_VERSION}.tar.gz \
+ && cd redis-${REDIS_VERSION} \
+ && make install
 
 
 #==============================#
