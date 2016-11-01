@@ -19,7 +19,7 @@ ENV \
  SCALA_VERSION=2.10.5 \
  SCALA_MAJOR_VERSION=2.10 \
  REDIS_VERSION=3.0.5 \
- SPARK_REDIS_CONNECTOR_VERSION=0.2.0 \
+ SPARK_REDIS_CONNECTOR_VERSION=0.2.0
 
 
 
@@ -221,13 +221,30 @@ ENV PATH=$HADOOP_HOME/bin:$PATH
 #	OTHER PATHS		 #
 #				 #
 #==============================#
+# MyApps
+ENV MYAPPS_HOME=$PIPELINE_HOME/myapps
+
 
 # Spark Master Port
 ENV SPARK_HOME=$DEV_INSTALL_HOME/spark-$SPARK_VERSION-bin-fluxcapacitor
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+ENV SPARK_EXAMPLES_JAR=$SPARK_HOME/lib/spark-examples-$SPARK_VERSION-hadoop$HADOOP_VERSION.jar
 ENV SPARK_MASTER=spark://127.0.0.1:7077
 
+# --repositories used to resolve --packages
+ENV SPARK_REPOSITORIES=http://dl.bintray.com/spark-packages/maven,https://oss.sonatype.org/content/repositories/snapshots,https://repository.apache.org/content/groups/snapshots
+
+# —jars used to resolve --packages
+ENV SPARK_SUBMIT_JARS=$MYAPPS_HOME/pmml/spark/1.6.1/lib/jpmml-sparkml-package-1.0-SNAPSHOT.jar
+
 # ENV SPARK_SUBMIT_PACKAGES=tjhunter:tensorframes:$TENSORFRAMES_VERSION-s_2.10,com.maxmind.geoip2:geoip2:$MAXMIND_GEOIP_VERSION,com.netflix.dyno:dyno-jedis:DYNO_VERSION,org.json4s:json4s-jackson_2.10:$JSON4S_VERSION,amplab:spark-indexedrdd:$INDEXEDRDD_VERSION,org.apache.spark:spark-streaming-kafka-assembly_2.10:$SPARK_VERSION,org.elasticsearch:elasticsearch-spark_2.10:$SPARK_ELASTICSEARCH_CONNECTOR_VERSION,com.datastax.spark:spark-cassandra-connector_2.10:$SPARK_CASSANDRA_CONNECTOR_VERSION,redis.clients:jedis:$JEDIS_VERSION,com.twitter:algebird-core_2.10:$ALGEBIRD_VERSION,com.databricks:spark-avro_2.10:$SPARK_AVRO_CONNECTOR_VERSION,com.databricks:spark-csv_2.10:$SPARK_CSV_CONNECTOR_VERSION,org.apache.nifi:nifi-spark-receiver:$SPARK_NIFI_CONNECTOR_VERSION,com.madhukaraphatak:java-sizeof_2.10:0.1,com.databricks:spark-xml_2.10:$SPARK_XML_VERSION,edu.stanford.nlp:stanford-corenlp:$STANFORD_CORENLP_VERSION,org.jblas:jblas:$JBLAS_VERSION,graphframes:graphframes:$GRAPHFRAMES_VERSION,com.amazonaws:aws-java-sdk:1.11.39
+
+# Used by Jupyter to submit Spark Jobs
+ENV SLIM_SPARK_SUBMIT_ARGS='--conf spark.cores.max=1 --conf spark.executor.memory=1g --jars /root/RecommendationEngine/myapps/pmml/spark/1.6.1/lib/jpmml-sparkml-package-1.0-SNAPSHOT.jar --repositories http://dl.bintray.com/spark-packages/maven,https://oss.sonatype.org/content/repositories/snapshots,https://repository.apache.org/content/groups/snapshots --py-files /root/RecommendationEngine/myapps/pmml/spark/1.6.1/lib/jpmml.py'
+
+ENV SPARK_SUBMIT_ARGS="--driver-class-path $SPARK_SUBMIT_JARS --jars $SPARK_SUBMIT_JARS --repositories $SPARK_REPOSITORIES --packages"
+
+
 
 # Java Home
 ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle/
@@ -246,6 +263,10 @@ ENV PATH=$ZEPPELIN_HOME/bin:$PATH
 # Python Path for PySpark
 ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.8.2.1-src.zip:$PYTHONPATH
+
+# Redis
+ENV REDIS_HOME=$DEV_INSTALL_HOME/redis-$REDIS_VERSION
+ENV PATH=$REDIS_HOME/bin:$PATH
 
 #==============================#
 #				 #
