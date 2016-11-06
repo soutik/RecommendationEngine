@@ -15,7 +15,7 @@ small_ratings_data = small_ratings_raw_data.map(lambda line: line.split("::")).m
 
 # In[77]:
 
-small_ratings_data.take(1)
+#small_ratings_data.take(1)
 
 
 # In[78]:
@@ -26,7 +26,7 @@ small_movies_data = small_movies_raw_data.map(lambda line: line.split("::")).map
 
 # In[79]:
 
-small_movies_data.take(3)
+#small_movies_data.take(3)
 
 
 # In[80]:
@@ -81,8 +81,8 @@ print 'For testing data the RMSE is %s' % (error)
 
 # In[90]:
 
-test_for_predict_RDD.take(1)
-training_RDD.take(1)
+#test_for_predict_RDD.take(1)
+#training_RDD.take(1)
 
 
 # In[146]:
@@ -98,7 +98,7 @@ movie_rating_counts_RDD = movie_ID_with_avg_ratings_RDD
 
 # In[148]:
 
-movie_rating_counts_RDD.take(10)
+#movie_rating_counts_RDD.take(10)
 
 
 # In[70]:
@@ -145,7 +145,7 @@ new_user_recommendations_RDD = new_ratings_model.predictAll(new_user_unrated_mov
 new_user_recommendations_rating_RDD = new_user_recommendations_RDD.map(lambda x: (x.product, x.rating))
 new_user_recommendations_rating_title_and_count_RDD =     new_user_recommendations_rating_RDD.join(small_movies_data.map(lambda x: (int(x[0]),x[1]))).join(movie_rating_counts_RDD.map(lambda x: (int(x[0]),x[1])))
     
-new_user_recommendations_rating_title_and_count_RDD.take(3)
+#new_user_recommendations_rating_title_and_count_RDD.take(3)
 
 
 # In[178]:
