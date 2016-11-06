@@ -160,7 +160,6 @@ RUN cd ~ \
  && rm confluent-${CONFLUENT_VERSION}-${SCALA_MAJOR_VERSION}.tar.gz
 
 # Redis
-
 RUN cd ~ \
  && wget http://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz \
  && tar -xzvf redis-${REDIS_VERSION}.tar.gz \
