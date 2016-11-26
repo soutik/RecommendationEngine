@@ -275,18 +275,28 @@ ENV PATH=$REDIS_HOME/bin:$PATH
 
 RUN mkdir $PROJECT_HOME/data
 
-RUN mkdir $PROJECT_HOME/data/smalldata \
- && mkdir $PROJECT_HOME/data/largedata \
- && cd $PROJECT_HOME/data/smalldata \
- && wget http://files.grouplens.org/datasets/movielens/ml-1m.zip \ 
- && unzip ml-1m.zip \
- && cd $PROJECT_HOME/data/smalldata \
- && rm ml-1m.zip
+RUN wget http://files.grouplens.org/datasets/movielens/ml-latest.zip \
+ && wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip \
+ && unzip ml-latest.zip \
+ && unzip ml-latest-small.zip \
+ && rm ml-latest.zip \
+ && rm ml-latest-small.zip
 
-RUN cd $PROJECT_HOME/data/largedata \
- && wget http://files.grouplens.org/datasets/movielens/ml-10m.zip \
- && unzip ml-10m.zip \
- && cd $PROJECT_HOME/data/largedata \
- && rm ml-10m.zip
+
+
+
+#RUN mkdir $PROJECT_HOME/data/smalldata \
+# && mkdir $PROJECT_HOME/data/largedata \
+# && cd $PROJECT_HOME/data/smalldata \
+# && wget http://files.grouplens.org/datasets/movielens/ml-1m.zip \ 
+# && unzip ml-1m.zip \
+# && cd $PROJECT_HOME/data/smalldata \
+# && rm ml-1m.zip
+
+#RUN cd $PROJECT_HOME/data/largedata \
+# && wget http://files.grouplens.org/datasets/movielens/ml-10m.zip \
+# && unzip ml-10m.zip \
+# && cd $PROJECT_HOME/data/largedata \
+# && rm ml-10m.zip
  
  
