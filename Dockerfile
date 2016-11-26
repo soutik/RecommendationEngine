@@ -275,6 +275,8 @@ ENV PATH=$REDIS_HOME/bin:$PATH
 
 RUN mkdir $PROJECT_HOME/data
 
+RUN cd $PROJECT_HOME/data
+
 RUN wget http://files.grouplens.org/datasets/movielens/ml-latest.zip \
  && wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip \
  && unzip ml-latest.zip \
