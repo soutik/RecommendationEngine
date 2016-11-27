@@ -36,7 +36,7 @@ def run_server(app):
 if __name__ == "__main__":
     # Init spark context and load libraries
     sc = init_spark_context()
-    dataset_path = os.path.join('/root/RecommendationEngine/data/', 'ml-latest-small/')
+    dataset_path = os.path.join('datasets', 'ml-latest')
     app = create_app(sc, dataset_path)
  
     # start web server

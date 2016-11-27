@@ -54,7 +54,11 @@ RUN \
  && apt-get install -y python-dev \
  && apt-get install -y python-pip \
  && pip install jupyter \
- && pip install ipyparallel
+ && pip install ipyparallel \
+ && pip install paste \
+ && pip install flask \
+ && pip install logging \
+ && pip install cherrypy
 
 
 # Python Data Science Libraries
@@ -273,11 +277,11 @@ ENV PATH=$REDIS_HOME/bin:$PATH
 #				 #
 #==============================#
 
-RUN mkdir $PROJECT_HOME/data
+RUN mkdir $PROJECT_HOME/myapps/app/datasets
 
-RUN cd $PROJECT_HOME/data
 
-RUN wget http://files.grouplens.org/datasets/movielens/ml-latest.zip \
+RUN cd $PROJECT_HOME/myapps/app/datasets \
+ && wget http://files.grouplens.org/datasets/movielens/ml-latest.zip \
  && wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip \
  && unzip ml-latest.zip \
  && unzip ml-latest-small.zip \
