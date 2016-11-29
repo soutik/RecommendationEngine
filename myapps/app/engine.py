@@ -80,7 +80,7 @@ class RecommendationEngine:
         user_unrated_movies_rdd = self.ratings_RDD.filter(lambda rating: not rating[0] == user_id)\
                                                  .map(lambda x: (user_id, x[1])).distinct()
         # Get predicted ratings
-        ratings = self.__predict_ratings(user_unrated_movies_RDD).filter(lambda r: r[2]>=25).takeOrdered(movies_count, key=lambda x: -1*x[1])
+        ratings = self.__predict_ratings(user_unrated_movies_rdd).filter(lambda r: r[2]>=25).takeOrdered(movies_count, key=lambda x: -1*x[1])
 
         return ratings
 
