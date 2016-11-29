@@ -1,4 +1,5 @@
 from flask import Blueprint
+import flask
 main = Blueprint('main', __name__)
  
 import json
@@ -14,13 +15,13 @@ from flask import Flask, request
 def top_ratings(user_id, count):
     logger.debug("User %s TOP ratings requested", user_id)
     top_ratings = recommendation_engine.get_top_ratings(user_id,count)
-    return json.dumps(top_ratings)
+    return flask.jsonify(top_ratings)
  
 @main.route("/<int:user_id>/ratings/<int:movie_id>", methods=["GET"])
 def movie_ratings(user_id, movie_id):
     logger.debug("User %s rating requested for movie %s", user_id, movie_id)
     ratings = recommendation_engine.get_ratings_for_movie_ids(user_id, [movie_id])
-    return json.dumps(ratings)
+    return flask.jsonify(ratings)
  
  
 @main.route("/<int:user_id>/ratings", methods = ["POST"])
