@@ -11,6 +11,20 @@ logger = logging.getLogger(__name__)
  
 from flask import Flask, request
  
+from flask import Flask
+import subprocess
+
+
+@main.route("/submitfile")
+def submit_file():
+    cmd = ["cd", "/root/RecommendationEngine/myapps/app", "&&", "curl", "--data-binary", "@user_ratings.file", "http://localhost:5432/0/ratings"]
+    subprocess.call(["cd", "/root/RecommendationEngine/myapps/app"])
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+    return "success"
+
 @main.route("/<int:user_id>/ratings/top/<int:count>", methods=["GET"])
 def top_ratings(user_id, count):
     logger.debug("User %s TOP ratings requested", user_id)
@@ -35,7 +49,7 @@ def add_ratings(user_id):
     recommendation_engine.add_ratings(ratings)
  
     return json.dumps(ratings)
- 
+
  
 def create_app(spark_context, dataset_path):
     global recommendation_engine 
