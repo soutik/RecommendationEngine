@@ -17,13 +17,13 @@ import subprocess
 
 @main.route("/submitfile")
 def submit_file():
-    cmd = ["cd", "/root/RecommendationEngine/myapps/app", "&&", "curl", "--data-binary", "@user_ratings.file", "http://localhost:5432/0/ratings"]
-    subprocess.call(["cd", "/root/RecommendationEngine/myapps/app"])
+    cmd = ["curl", "--data-binary", 
+            "@user_ratings.file", "http://localhost:5432/0/ratings"]
     p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
                             stderr=subprocess.PIPE,
                             stdin=subprocess.PIPE)
     out,err = p.communicate()
-    return "success"
+    return out
 
 @main.route("/<int:user_id>/ratings/top/<int:count>", methods=["GET"])
 def top_ratings(user_id, count):
