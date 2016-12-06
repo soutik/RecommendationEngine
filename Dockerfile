@@ -58,7 +58,8 @@ RUN \
  && pip install paste \
  && pip install flask \
  && pip install logging \
- && pip install cherrypy
+ && pip install cherrypy \
+ && pip install subprocess
 
 
 # Python Data Science Libraries
