@@ -49,7 +49,7 @@ echo '...Starting Jupyter Hub Server...'
 nohup jupyterhub -f $CONFIG_HOME/jupyter/jupyterhub_config &
 
 echo '...Submitting spark job...'
-nohup cd /root/RecommendationEngine/myapps/app &
+cd /root/RecommendationEngine/myapps/app
 nohup $SPARK_HOME/bin/spark-submit --master spark://127.0.0.1:7077 --total-executor-cores 14 --executor-memory 6g server.py &
 
 
